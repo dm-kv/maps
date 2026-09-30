@@ -49,7 +49,6 @@ class MapsFragment : Fragment() {
 
     private val inputListenerImpl = object : InputListener {
         override fun onMapTap(map: Map, point: Point) {
-            // Если только что был клик по метке — пропускаем
             if (markerTapped) {
                 markerTapped = false
                 return
@@ -145,7 +144,6 @@ class MapsFragment : Fragment() {
 
         Log.d("MapsFrag", ">>> renderMarkers: получено ${markers.size} точек")
 
-        // Удаляем только свои метки
         myPlacemarks.forEach { yandexMap.mapObjects.remove(it) }
         myPlacemarks.clear()
 
@@ -177,7 +175,6 @@ class MapsFragment : Fragment() {
                 }
             }
 
-            // ✅ Сохраняем сильную ссылку, чтобы GC не удалил слушатель
             tapListeners.add(tapListener)
 
             val placemark = yandexMap.mapObjects.addPlacemark {
@@ -245,7 +242,7 @@ class MapsFragment : Fragment() {
         isViewAlive = false
         markerTapped = false
         myPlacemarks.clear()
-        tapListeners.clear()  // ✅
+        tapListeners.clear()
         mapView = null
         _binding = null
     }

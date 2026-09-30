@@ -25,7 +25,6 @@ class PointsListFragment : Fragment() {
 
     private val viewModel: MarkerViewModel by activityViewModels()
 
-    // Создаём адаптер один раз
     private val adapter = PointsAdapter { marker ->
         viewModel.requestFocus(marker.id)
         findNavController().popBackStack()
@@ -45,7 +44,6 @@ class PointsListFragment : Fragment() {
 
         binding.recyclerPoints.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerPoints.adapter = adapter
-        // Отключаем анимации, чтобы исключить «пропадание» из-за аниматора
         binding.recyclerPoints.itemAnimator = null
     }
 
