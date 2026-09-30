@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/maps">
+
+    <fragment
+        android:id="@+id/maps"
+        android:name="ru.netology.nmedia.ui.MapsFragment"
+        android:label="Карта">
+        <action
+            android:id="@+id/action_maps_to_list"
+            app:destination="@id/list" />
+        <action
+            android:id="@+id/action_maps_to_edit"
+            app:destination="@id/edit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/list"
+        android:name="ru.netology.nmedia.ui.PointsListFragment"
+        android:label="Точки" />
+
+    <fragment
+        android:id="@+id/edit"
+        android:name="ru.netology.nmedia.ui.EditPointFragment"
+        android:label="Точка">
+    </fragment>
+
+</navigation>
