@@ -20,7 +20,6 @@ class MarkerViewModel(application: Application) : AndroidViewModel(application) 
 
     val markers: LiveData<List<Marker>> = repository.allMarkers.asLiveData()
 
-    // Для фокуса на маркере при возврате из списка
     private val _focusMarkerId = MutableLiveData<Long?>()
     val focusMarkerId: LiveData<Long?> = _focusMarkerId
 

@@ -154,7 +154,7 @@ class MapsFragment : Fragment() {
 
         val imageProvider = DrawableImageProvider(
             requireContext(),
-            ImageInfo(R.drawable.ic_netology_48dp)
+            ImageInfo(android.R.drawable.btn_star_big_on)
         )
 
         markers.forEach { marker ->

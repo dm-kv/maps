@@ -13,7 +13,7 @@
             android:id="@+id/textCoordinates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="130dp"
             android:text="0.00000, 0.00000"
             android:textSize="16sp" />
 

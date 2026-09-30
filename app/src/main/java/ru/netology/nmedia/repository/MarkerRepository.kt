@@ -13,18 +13,17 @@ class MarkerRepository(private val dao: MarkerDao) {
 
     suspend fun save(marker: Marker) {
         val entity = MarkerEntity(
-            id = marker.id, // если 0 — Room сам поставит новый ID при insert
+            id = marker.id,
             title = marker.title,
             description = marker.description,
             latitude = marker.latitude,
             longitude = marker.longitude
         )
         if (marker.id == 0L) {
-            dao.insert(entity) // автоинкремент даст новый ID
+            dao.insert(entity)
         } else {
             dao.update(entity)
         }
-        // Важно: не нужно ничего дополнительно делать — Flow от Room сам обновится.
     }
 
     suspend fun delete(marker: Marker) = dao.delete(marker.toEntity())

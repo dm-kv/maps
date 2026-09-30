@@ -45,6 +45,7 @@ class PointsListFragment : Fragment() {
         binding.recyclerPoints.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerPoints.adapter = adapter
         binding.recyclerPoints.itemAnimator = null
+
     }
 
     override fun onResume() {
