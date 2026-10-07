@@ -11,6 +11,8 @@ import ru.netology.nmedia.databinding.FragmentEditPointBinding
 import ru.netology.nmedia.domain.Marker
 import ru.netology.nmedia.viemodel.MarkerViewModel
 import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.R
+import ru.netology.nmedia.domain.MarkerArgs
 
 class EditPointFragment : Fragment() {
 
@@ -36,9 +38,9 @@ class EditPointFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        markerId = arguments?.getLong("markerId", -1L) ?: -1L
-        latitude = arguments?.getDouble("latitude", 0.0) ?: 0.0
-        longitude = arguments?.getDouble("longitude", 0.0) ?: 0.0
+        markerId = arguments?.getLong(MarkerArgs.MARKER_ID, -1L) ?: -1L
+        latitude = arguments?.getDouble(MarkerArgs.LATITUDE, 0.0) ?: 0.0
+        longitude = arguments?.getDouble(MarkerArgs.LONGITUDE, 0.0) ?: 0.0
 
         if (markerId > 0) {
             viewModel.getById(markerId) { marker ->
@@ -63,7 +65,7 @@ class EditPointFragment : Fragment() {
 
             val marker = Marker(
                 id = if (markerId > 0) markerId else 0,
-                title = if (title.isEmpty()) "Без названия" else title,
+                title = if (title.isEmpty()) requireContext().getString(R.string.marker_no_title) else title,
                 description = description,
                 latitude = latitude,
                 longitude = longitude

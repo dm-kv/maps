@@ -1,21 +1,16 @@
 package ru.netology.nmedia.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
-import ru.netology.nmedia.data.AppDatabase
 import ru.netology.nmedia.databinding.FragmentPointsListBinding
-import ru.netology.nmedia.domain.Marker
+import ru.netology.nmedia.R
 import ru.netology.nmedia.viemodel.MarkerViewModel
 
 class PointsListFragment : Fragment() {
@@ -46,39 +41,18 @@ class PointsListFragment : Fragment() {
         binding.recyclerPoints.adapter = adapter
         binding.recyclerPoints.itemAnimator = null
 
-    }
+        viewModel.markers.observe(viewLifecycleOwner) { markers ->
+            adapter.submitList(markers)
+            binding.emptyState.visibility = if (markers.isEmpty()) View.VISIBLE else View.GONE
 
-    override fun onResume() {
-        super.onResume()
-        loadMarkers()
-    }
-
-    private fun loadMarkers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            try {
-                val dao = AppDatabase.getInstance(requireContext()).markerDao()
-                val entities = dao.getAll().first()
-                val markers = entities.map {
-                    Marker(it.id, it.title, it.description, it.latitude, it.longitude)
-                }
-
-                Log.d("PointsList", ">>> DIRECT: size=${markers.size}, ids=${markers.map { it.id }}")
-
-                if (markers.isNotEmpty()) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Загружено точек: ${markers.size}\nПервая: ${markers[0].title}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    Toast.makeText(requireContext(), "Список пуст", Toast.LENGTH_SHORT).show()
-                }
-
-                adapter.submitList(markers)
-                binding.recyclerPoints.scrollToPosition(0)
-                binding.emptyState.visibility = if (markers.isEmpty()) View.VISIBLE else View.GONE
-            } catch (e: Exception) {
-                Log.e("PointsList", ">>> ERROR loading markers", e)
+            if (markers.isNotEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.toast_markers_loaded, markers.size),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.toast_empty_list), Toast.LENGTH_SHORT).show()
             }
         }
     }

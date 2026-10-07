@@ -26,6 +26,7 @@ import com.yandex.mapkit.mapview.MapView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.FragmentMapsBinding
 import ru.netology.nmedia.domain.Marker
+import ru.netology.nmedia.domain.MarkerArgs
 import ru.netology.nmedia.ui.extensions.DrawableImageProvider
 import ru.netology.nmedia.ui.extensions.ImageInfo
 import ru.netology.nmedia.viemodel.MarkerViewModel
@@ -144,9 +145,6 @@ class MapsFragment : Fragment() {
 
         Log.d("MapsFrag", ">>> renderMarkers: получено ${markers.size} точек")
 
-        myPlacemarks.forEach { yandexMap.mapObjects.remove(it) }
-        myPlacemarks.clear()
-
         if (markers.isEmpty()) {
             Log.w("MapsFrag", "Список маркеров пуст!")
             return
@@ -166,9 +164,9 @@ class MapsFragment : Fragment() {
                     if (storedMarker != null) {
                         markerTapped = true
                         findNavController().navigate(R.id.edit, Bundle().apply {
-                            putLong("markerId", storedMarker.id)
-                            putDouble("latitude", storedMarker.latitude)
-                            putDouble("longitude", storedMarker.longitude)
+                            putLong(MarkerArgs.MARKER_ID, storedMarker.id)
+                            putDouble(MarkerArgs.LATITUDE, storedMarker.latitude)
+                            putDouble(MarkerArgs.LONGITUDE, storedMarker.longitude)
                         })
                     }
                     return true

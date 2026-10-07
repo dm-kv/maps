@@ -34,7 +34,7 @@ maps-mobile-v4450lite = { module = "com.yandex.android:maps.mobile", version.ref
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-material-v1120 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

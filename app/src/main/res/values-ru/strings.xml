@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NMedia</string>
+    <string name="marker_no_title">Без названия</string>
+    <string name="toast_markers_loaded">Загружено точек: %1$d</string>
+    <string name="toast_empty_list">Список пуст</string>
 </resources>
